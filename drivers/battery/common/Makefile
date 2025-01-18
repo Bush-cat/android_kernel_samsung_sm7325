@@ -47,6 +47,23 @@ endif
 
 else
 
+ifdef CONFIG_SEC_GTS7FEWIFI_PROJECT
+
+obj-$(CONFIG_DIRECT_CHARGING)		+= gts7fewifi/sec_direct_charger.o
+
+obj-$(CONFIG_SEC_PD)				+= gts7fewifi/sec_pd.o
+
+obj-$(CONFIG_BATTERY_SAMSUNG)	+= sec-battery.o
+sec-battery-$(CONFIG_BATTERY_SAMSUNG)		+= gts7fewifi/sec_battery.o gts7fewifi/sec_battery_vote.o gts7fewifi/sec_battery_thermal.o gts7fewifi/sec_battery_sysfs.o gts7fewifi/sec_battery_dt.o gts7fewifi/sec_battery_ttf.o gts7fewifi/sec_adc.o gts7fewifi/sb_full_soc.o
+sec-battery-$(CONFIG_BATTERY_CISD)	+= gts7fewifi/sec_cisd.o
+sec-battery-$(CONFIG_STEP_CHARGING)		+= gts7fewifi/sec_step_charging.o
+sec-battery-$(CONFIG_WIRELESS_AUTH)		+= gts7fewifi/sec_battery_misc.o
+sec-battery-$(CONFIG_WIRELESS_CHARGING)	+= gts7fewifi/sec_battery_wc.o
+
+obj-$(CONFIG_UPDATE_BATTERY_DATA)	+= gts7fewifi/sec_battery_data.o
+
+else
+
 obj-$(CONFIG_DIRECT_CHARGING)		+= sec-direct-charger.o
 sec-direct-charger-$(CONFIG_DIRECT_CHARGING)	+= sb_pass_through.o sec_direct_charger.o
 
@@ -63,6 +80,8 @@ sec-battery-$(CONFIG_WIRELESS_TX_MODE)	+= sb_tx.o
 sec-battery-$(CONFIG_BATTERY_LOGGING)	+= battery_logger.o sb_batt_dump.o
 
 obj-$(CONFIG_UPDATE_BATTERY_DATA)	+= sec_battery_data.o
+
+endif
 
 ifeq ($(CONFIG_SEC_KUNIT), y)
  GCOV_PROFILE_sec_battery.o := $(CONFIG_SEC_KUNIT)
@@ -81,4 +100,5 @@ ifeq ($(CONFIG_UML), y)
 endif
 endif
 endif
+
 ccflags-y := -Wformat

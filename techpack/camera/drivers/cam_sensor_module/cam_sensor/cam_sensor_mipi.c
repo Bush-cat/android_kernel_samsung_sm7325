@@ -17,7 +17,6 @@
 #include <linux/bsearch.h>
 #include <linux/dev_ril_bridge.h>
 #include "cam_sensor_mipi.h"
-#include "cam_sensor_adaptive_mipi_imx258.h"
 #include "cam_sensor_adaptive_mipi_tele.h"
 #include "cam_sensor_adaptive_mipi_front.h"
 #include "cam_sensor_adaptive_mipi_front_top.h"
@@ -25,13 +24,20 @@
 
 #if defined(CONFIG_SEC_A52SXQ_PROJECT)
 #include "cam_sensor_adaptive_mipi_imx682.h"
+#include "cam_sensor_adaptive_mipi_imx258.h"
 #include "cam_sensor_adaptive_mipi_uw_dual.h"
 #elif defined(CONFIG_SEC_M52XQ_PROJECT)
 #include "cam_sensor_adaptive_mipi_s5kgw3.h"
+#include "cam_sensor_adaptive_mipi_imx258.h"
 #include "cam_sensor_adaptive_mipi_uw_dual.h"
 #elif defined(CONFIG_SEC_A73XQ_PROJECT)
 #include "cam_sensor_adaptive_mipi_s5khm6.h"
+#include "cam_sensor_adaptive_mipi_imx258.h"
 #include "cam_sensor_adaptive_mipi_hi1336.h"
+#else
+#include "cam_sensor_adaptive_mipi_wide.h"
+#include "cam_sensor_adaptive_mipi_uw.h"
+#include "cam_sensor_adaptive_mipi_uw_dual.h"
 #endif
 
 static struct cam_cp_noti_info g_cp_noti_info;
